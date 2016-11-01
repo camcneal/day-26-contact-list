@@ -1,12 +1,14 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import logins from './views/loginview';
-import NewContact from './views/newContactView';
+import newContactForm from './views/newContactForm';
 import signUps from './views/signup';
-import contacts from './views/newContactView';
+import contacts from './views/newContactForm';
+import Session from './model/session';
 
 // let logins = new Logins();
 // let contacts = new Contacts();
+let session = new Session();
 
 const Router = Backbone.Router.extend({
   routes: {
@@ -15,18 +17,13 @@ const Router = Backbone.Router.extend({
   },
   userLogin: () => {
     $('.container').empty();
-  $('.container').append(logins(), signUps());
+  $('.container').append(logins(session), signUps(session));
 },
 
-// userLogin: () => {
-//   $('.container').empty();
-//   $('.container').append(signUps());
-// },
-
-// ,userSignUp(fullname,nickname,email,phone)
-newContactView: () => {
+newContactForm: () => {
   $('.container').empty();
   $('.container').append(contacts());
+
 }
 
 });
