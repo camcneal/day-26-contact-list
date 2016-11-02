@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 
-function contactInfo (fullname,nickname,email,phone) {
+function contactInfo (contacts) {
 
   let contactForm = $(`
       <form class="contacts" >
@@ -13,10 +13,13 @@ function contactInfo (fullname,nickname,email,phone) {
       </form>`);
       contactForm.on('submit', (e) => {
         e.preventDefault();
-        const fullname = ContactData.find('#fullname').val();
-        const nickname = ContactData.find('#nickname').val();
-        const email = ContactData.find('#email').val();
-        const phone = ContactData.find('#phone').val();
+        const fullname = contactForm.find('#fullname').val();
+        const nickname = contactForm.find('#nickname').val();
+        const email = contactForm.find('#email').val();
+        const phone = contactForm.find('#phone').val();
+        contacts.create({fullname,nickname,email,phone},{
+
+        });
         console.log(contactForm);
       });
     return contactForm;
