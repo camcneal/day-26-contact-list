@@ -48,7 +48,6 @@ var Session = Backbone.Model.extend({
     },
 
     validatePassword: function(password) {
-      console.log('pw:', password);
       if(password === '') return false; return true;
     }
 });

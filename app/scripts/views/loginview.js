@@ -19,7 +19,7 @@ function userLogin (session) {
         } else {
           alert('email or password invalid');
         }
-        
+        location.hash = 'newContacts';
       });
     return loginForm;
 }
