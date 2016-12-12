@@ -16,10 +16,11 @@ function userLogin (session) {
         const password = loginForm.find('#password').val();
         if(session.validateEmail(email) && session.validatePassword(password)){
           session.userLogin(email,password);
+          location.hash = 'newContacts';
+
         } else {
           alert('email or password invalid');
         }
-        location.hash = 'newContacts';
       });
     return loginForm;
 }
