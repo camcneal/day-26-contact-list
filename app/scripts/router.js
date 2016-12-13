@@ -15,47 +15,54 @@ let session = new Session();
 let contacts = new Contacts();
 
 const Router = Backbone.Router.extend({
-  routes: {
-    '': 'userLogin',
-    'newContacts': 'newContactForm',
-    'contacts': 'contacts'
-  },
-  userLogin: () => {
-    $('.container').empty();
-  $('.container').append(logins(session), signUps(session));
-},
+    routes: {
+        '': 'userLogin',
+        'newContacts': 'newContactForm',
+        'contacts': 'contacts'
+    },
+    userLogin: () => {
+        $('.container').empty();
+        $('.container').append(logins(session), signUps(session));
+    },
 
-newContactForm: () => {
-  $('.container').empty();
-  $('.container').append(contactForm(contacts));
+    newContactForm: () => {
+        $('.container').empty();
+        if(localStorage.getItem('user-token')){
+          console.log('hi');
+          $('.container').append(contactForm(contacts))
 
-},
-
-contacts: () => {
-  session.get('user-token');
-    console.log(session.get('user-token'));
-    contacts.fetch({
-      headers: {
-        'application-id': '9181EAE8-99E5-1413-FF8F-D416829DB400',
-        'secret-key': 'E6286515-2F36-0307-FF15-C42A57B78100',
-        'application-type': 'REST',
-        'Content-Type': 'application/json',
-        'user-token': store.sessionModel.get('user-token')
-      },
-      success(collection, response){
-        console.log('Contacts recieved');
-        console.log(collection, response);
-      },
-      error(response){
-        console.log('Contacts not recieved');
-      }
-    })
-
-  $('.container').empty();
-  $('.container').append(contactList(contacts,session));
+        } else {
+          location.hash = '';
+        }
 
 
-}
+    },
+
+    contacts: () => {
+        if(localStorage.getItem('user-token'));
+        console.log(session.get('user-token'));
+        contacts.fetch({
+            headers: {
+                'application-id': '9181EAE8-99E5-1413-FF8F-D416829DB400',
+                'secret-key': 'E6286515-2F36-0307-FF15-C42A57B78100',
+                'application-type': 'REST',
+                'Content-Type': 'application/json',
+                'user-token': store.sessionModel.get('user-token')
+            },
+            success(collection, response) {
+                console.log('Contacts recieved');
+                console.log(collection, response);
+            },
+            error(response) {
+                console.log('Contacts not recieved');
+            }
+        })
+
+        $('.container').empty();
+        $('.container').append(contactList(contacts, session));
+
+
+    }
 
 });
 const router = new Router();

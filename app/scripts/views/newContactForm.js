@@ -11,33 +11,43 @@ function contactInfo(contacts) {
         <input id="email" type="text" placeholder="email">
         <input id="phone" type="text" placeholder="phone">
         <input type="submit" value="Add Contact">
-      </form>`);
+      </form>
+       <a class="contactNav" href="#contacts">Contact List</a> `);
+
+       let contactNav = contactForm.find('a');
+
+      contactNav.on('click', (e) => {
+        e.preventDefault();
+        location.hash = 'contacts';
+      });
+
     contactForm.on('submit', (e) => {
-            e.preventDefault();
-            let contact = {
-              fullName: contactForm.find('#fullName').val(),
-              nickname: contactForm.find('#nickName').val(),
-              email: contactForm.find('#email').val(),
-              phone: contactForm.find('#phone').val(),
-            };
-            contacts.create(contact, {
-                headers: {
-                    'application-id': '9181EAE8-99E5-1413-FF8F-D416829DB400',
-                    'secret-key': 'E6286515-2F36-0307-FF15-C42A57B78100',
-                    'application-type': 'REST',
-                    'user-token': store.sessionModel.get('user-token')
-                },
-                success(response) {
-                  console.log();
-                    alert('Contact added!');
-                }
-              })
-              location.hash = 'contacts';
+      console.log(store.sessionModel);
+        e.preventDefault();
+        let contact = {
+            fullName: contactForm.find('#fullName').val(),
+            nickname: contactForm.find('#nickName').val(),
+            email: contactForm.find('#email').val(),
+            phone: contactForm.find('#phone').val(),
+        };
+        contacts.create(contact, {
+            headers: {
+                'application-id': '9181EAE8-99E5-1413-FF8F-D416829DB400',
+                'secret-key': 'E6286515-2F36-0307-FF15-C42A57B78100',
+                'application-type': 'REST',
+                'user-token': localStorage.getItem('user-token')
+            },
+            success(response) {
+                console.log();
+                alert('Contact added!');
+            }
+        })
+        location.hash = 'contacts';
 
-            })
-        return contactForm;
+    })
+    return contactForm;
 
 
 
-    }
-    export default contactInfo;
+}
+export default contactInfo;

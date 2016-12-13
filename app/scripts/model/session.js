@@ -17,7 +17,10 @@ var Session = Backbone.Model.extend({
                 login: email,
                 password: password
             }),
-            success(response) {
+            success: (response) => {
+              this.set(response)
+              location.hash = 'newContacts';
+              localStorage.setItem('user-token', response['user-token'])
                 console.log(response);
             }
 

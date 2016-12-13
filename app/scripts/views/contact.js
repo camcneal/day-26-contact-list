@@ -3,8 +3,8 @@ import store from '../store';
 
 
 export default function(addressBook) {
-console.log(addressBook);
-  let singleContact = $(`
+    console.log(addressBook);
+    let singleContact = $(`
     <li>
       Name: ${addressBook.get('fullName')}
       <br>Nickname: ${addressBook.get('nickname')}
@@ -14,5 +14,5 @@ console.log(addressBook);
     `);
 
 
-  return singleContact;
+    return singleContact;
 }
