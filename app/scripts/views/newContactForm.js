@@ -38,8 +38,10 @@ function contactInfo(contacts) {
                 'user-token': localStorage.getItem('user-token')
             },
             success(response) {
-                console.log();
-                alert('Contact added!');
+              this.set(response)
+              location.hash = 'newContacts';
+              localStorage.setItem('user-token', response['user-token'])
+                console.log(response);                alert('Contact added!');
             }
         })
         location.hash = 'contacts';

@@ -47,7 +47,7 @@ const Router = Backbone.Router.extend({
                 'secret-key': 'E6286515-2F36-0307-FF15-C42A57B78100',
                 'application-type': 'REST',
                 'Content-Type': 'application/json',
-                'user-token': store.sessionModel.get('user-token')
+                'user-token': localStorage.getItem('user-token')
             },
             success(collection, response) {
                 console.log('Contacts recieved');

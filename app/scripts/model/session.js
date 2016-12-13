@@ -41,7 +41,7 @@ var Session = Backbone.Model.extend({
                 password: password
             }),
             success(response) {
-
+              
             }
 
         });
